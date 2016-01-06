@@ -10,6 +10,20 @@ var users = require('./routes/users');
 
 var app = express();
 
+if(app.get('env') === "development") {
+  require('dotenv').load();
+  console.log("Loading dotEnv.");
+}
+
+// Mongoose ODM
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_CONNECT_STRING);
+
+var Observation = require('./models/observation.model.server')(mongoose);
+var observationDA = require('./da/observation.da.server')(Observation);
+var observationCtrl = require('./controllers/observation.controller.server')(observationDA);
+var observationRoutes = require('./routes/observation.routes.server')(observationCtrl);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
@@ -23,6 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/', observationRoutes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
