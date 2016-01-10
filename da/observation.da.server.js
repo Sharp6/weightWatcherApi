@@ -15,7 +15,8 @@ var observationDA = function(Observation) {
 		return new Promise(function(resolve,reject) {
 			var newObservation = new Observation({
 				weight: data.weight,
-				note: data.note
+				note: data.note,
+				nonStandard: data.nonStandard
 			});
 
 			newObservation.save();
