@@ -10,7 +10,6 @@ var observationCtrl = function(da) {
 	}
 
 	var addObservation = function(req,res) {
-		console.log(req.body);
 		var data = req.body;
 		da.addObservation(data)
 			.then(function(result) {
