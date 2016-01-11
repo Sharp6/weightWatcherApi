@@ -19,9 +19,13 @@ var observationDA = function(Observation) {
 				nonStandard: data.nonStandard
 			});
 
-			newObservation.save();
-
-			resolve();
+			newObservation.save(function(err) {
+				if(err) {
+					reject(err);
+				} else {
+					resolve();	
+				}
+			});
 		});
 	}
 
