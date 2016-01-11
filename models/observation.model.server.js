@@ -3,7 +3,7 @@ var Observation = function(mongoose) {
 		weight: Number, 
 		observedDate: { type: Date, default: Date.now },
 		note: String,
-		nonStandard: boolean
+		nonStandard: Boolean
 	});
 
 	var model = mongoose.model('Observation', observationSchema);
