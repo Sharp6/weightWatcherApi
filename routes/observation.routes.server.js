@@ -11,6 +11,12 @@ var ObservationRoutes = function(ctrl) {
 			return ctrl.addObservation(req,res);
 		});
 
+	router.route('/api/observationSearch/date/:date')
+		.get(function(req,res) {
+			return ctrl.searchObservationClosestByDate(req,res);
+		});
+
+
 	return router;
 }
 
